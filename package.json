@@ -1,14 +1,13 @@
 {
   "name": "js-starter",
   "version": "0.0.1",
-  "description": "A boilerplate for starting js code",
+  "description": "Customer Javascript and Postgres Boiler plate",
   "keywords": [
-    "js-starter",
+    "js-custom-template",
     "boilerplate"
   ],
   "private": false,
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "directories": {
     "test": "__tests__"
   },
@@ -25,16 +24,7 @@
     "build": "npm run clean && npm run build-babel"
   },
   "author": {
-    "name": "Build For SDG",
-    "email": "buildforsdg@andela.com"
-  },
-  "homepage": "https://github.com/BuildForSDG/js-starter#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BuildForSDG/js-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/BuildForSDG/js-starter/issues"
+    "name": "Sikiru moshood"
   },
   "license": "MIT",
   "dependencies": {

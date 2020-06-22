@@ -4,7 +4,6 @@ import production from './environment/production';
 
 const defaults = {
   auth: {
-    issuer: 'Roadry',
     subject: 'LoginToken',
     expiresIn: '720h' // days
   },

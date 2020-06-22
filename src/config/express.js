@@ -4,12 +4,6 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import FileStreamRotator from 'file-stream-rotator';
 import loggerInit from './logger';
-import adminRoutes from '../app/routes/admin';
-import authRoutes from '../app/routes/auth';
-import roadRoutes from '../app/routes/road';
-import userRoutes from '../app/routes/user';
-import wardenRoutes from '../app/routes/warden';
-import accidentRoutes from '../app/routes/accident';
 
 const logDirectory = './log';
 const checkLogDir = fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -35,7 +29,7 @@ const expressConfig = (app) => {
   if (checkLogDir) {
     accessLogStream = FileStreamRotator.getStream({
       date_format: 'YYYYMMDD',
-      filename: `${logDirectory}/roadry-%DATE%.log`,
+      filename: `${logDirectory}/application-%DATE%.log`,
       frequency: 'weekly',
       verbose: false
     });
@@ -49,6 +43,7 @@ const expressConfig = (app) => {
   app.use(helmet());
   app.disable('x-powered-by');
 
+// ----------------------- SERVER HEADERS ----------------------
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -56,14 +51,12 @@ const expressConfig = (app) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
   });
+// ----------------------- SERVER HEADERS ----------------------
 
-  app.use('/api/v1/admin', adminRoutes);
-  app.use('/api/v1/auth', authRoutes);
-  app.use('/api/v1/road', roadRoutes);
-  app.use('/api/v1/user', userRoutes);
-  app.use('/api/v1/warden', wardenRoutes);
-  app.use('/api/v1/accident', accidentRoutes);
 
+// ---------------------- ROUTES --------------------------
+   // app.use('/api/v1/admin', adminRoutes);
+// ------------------------ END OF ROUTES -------------------
   app.use((req, res) => res.status(404).json({
     message: 'Not Found',
     status: 404
