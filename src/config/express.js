@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import FileStreamRotator from 'file-stream-rotator';
 import loggerInit from './logger';
+import productsRoute from '../app/routes/products';
 
 const logDirectory = './log';
 const checkLogDir = fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -43,7 +44,7 @@ const expressConfig = (app) => {
   app.use(helmet());
   app.disable('x-powered-by');
 
-// ----------------------- SERVER HEADERS ----------------------
+  // ----------------------- SERVER HEADERS ----------------------
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -51,12 +52,11 @@ const expressConfig = (app) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
   });
-// ----------------------- SERVER HEADERS ----------------------
+  // ----------------------- SERVER HEADERS ----------------------
 
-
-// ---------------------- ROUTES --------------------------
-   // app.use('/api/v1/admin', adminRoutes);
-// ------------------------ END OF ROUTES -------------------
+  // ---------------------- ROUTES --------------------------
+  app.use('/api/v1/products', productsRoute);
+  // ------------------------ END OF ROUTES -------------------
   app.use((req, res) => res.status(404).json({
     message: 'Not Found',
     status: 404

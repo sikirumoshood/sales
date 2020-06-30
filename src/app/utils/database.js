@@ -6,6 +6,6 @@ const promise = require('bluebird');
 
 const pg = pgp({ promiseLib: promise, noLocking: true });
 
-const roadryDb = pg(config.DATABASE_URL);
+const sales = pg(config.DATABASE_URL);
 
-export default roadryDb;
+export default sales;
