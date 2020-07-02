@@ -1,7 +1,9 @@
+import { all } from 'bluebird';
 import ProductsValidationService from '../services/products.validation.service.controller';
 import ProductsService from '../services/products.service';
 import { successResponse } from '../utils/responses';
 import CategoryExistsService from '../services/category.check.if.exists';
+import fetchProductsService from '../services/products.all.service';
 
 class Products {
   /**
@@ -28,6 +30,28 @@ class Products {
       return successResponse('Product stored successfully', productResult.data, res);
     } catch (e) {
       logger.error('Error from storeNewProducts ', e);
+      return res.status(400).json({
+        status: 'Error',
+        message: e.message,
+        data: e.data
+      });
+    }
+  }
+
+  /**
+   * @description - Returns all products
+   * @param {object} req
+   * @param {object} res
+   */
+  static async getAllProducts(req, res) {
+    try {
+      const allProductsResult = await fetchProductsService.fetchAllProducts();
+      if (!allProductsResult.success) {
+        throw new Error('We are unable to fetch all products');
+      }
+
+      return successResponse('Successfully fetched all Products', allProductsResult.data, res);
+    } catch (e) {
       return res.status(400).json({
         status: 'Error',
         message: e.message,
