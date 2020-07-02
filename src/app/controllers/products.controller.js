@@ -1,6 +1,7 @@
 import ProductsValidationService from '../services/products.validation.service.controller';
 import ProductsService from '../services/products.service';
 import { successResponse } from '../utils/responses';
+import CategoryExistsService from '../services/category.check.if.exists';
 
 class Products {
   /**
@@ -12,6 +13,12 @@ class Products {
     try {
       const { body } = req;
       const productData = ProductsValidationService.validateNewProduct(body);
+      // Check if category exists
+      const category = await CategoryExistsService.checkIfCategoryExists(body);
+      console.log(category);
+      if (!category.success) {
+        throw new Error("Category doesn't exists!");
+      }
       // Call product service
       const productResult = await ProductsService.storeProduct(productData);
       if (!productResult.success) {
