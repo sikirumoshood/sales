@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import FileStreamRotator from 'file-stream-rotator';
 import loggerInit from './logger';
 import productsRoute from '../app/routes/products';
+import categoriesRoute from '../app/routes/categories';
 
 const logDirectory = './log';
 const checkLogDir = fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -56,6 +57,7 @@ const expressConfig = (app) => {
 
   // ---------------------- ROUTES --------------------------
   app.use('/api/v1/products', productsRoute);
+  app.use('/api/v1/categories', categoriesRoute);
   // ------------------------ END OF ROUTES -------------------
   app.use((req, res) => res.status(404).json({
     message: 'Not Found',

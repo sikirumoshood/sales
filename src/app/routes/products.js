@@ -8,4 +8,9 @@ Router.post(
   Products.storeNewProduct
 );
 
+Router.get(
+  '/',
+  Products.getAllProducts
+);
+
 export default Router;
