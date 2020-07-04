@@ -6,9 +6,7 @@ class Category {
   static async save(category) {
     try {
       const { name } = category;
-      console.log('here');
       const newCategory = await db.oneOrNone(categoryQuery.saveCategory, [name]);
-      console.log('passed query');
       return newCategory;
     } catch (e) {
       logger.error('unable to save new category to the database', e);

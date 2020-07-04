@@ -25,9 +25,7 @@ class Product {
    */
   static async getAllProducts() {
     try {
-      console.log('in');
       const allProducts = await db.manyOrNone(query.findAllProductsAndTheirCategroies);
-      console.log(allProducts);
       return allProducts;
     } catch (e) {
       console.log(e);
