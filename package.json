@@ -30,6 +30,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@sendgrid/mail": "^6.4.0",
+    "async": "^3.2.0",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
     "bluebird": "^3.5.4",

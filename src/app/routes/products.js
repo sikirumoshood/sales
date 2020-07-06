@@ -1,16 +1,18 @@
 import express from 'express';
-import Products from '../controllers/products.controller';
+import fetchAllProducts from '../controllers/async.get.products.controller';
+import createProduct from '../controllers/async.product.controller';
 
 const Router = express();
 
 Router.post(
   '/',
-  Products.storeNewProduct
+  createProduct
+
 );
 
 Router.get(
   '/',
-  Products.getAllProducts
+  fetchAllProducts
 );
 
 export default Router;
