@@ -14,7 +14,7 @@
   "scripts": {
     "create-admin": "node_modules/@babel/node/bin/babel-node.js src/app/scripts/create.first.admin",
     "migrate": "node_modules/db-migrate/bin/db-migrate up -e production",
-    "test": "nyc mocha --require @babel/register './__tests__/**/**.spec.js'",
+    "test": "db-migrate down:test && db-migrate up:test && nyc mocha --require @babel/register './src/test/**/**.spec.js'",
     "test:watch": "mocha --watch",
     "lint": "eslint \"src/**/*.js\"",
     "start:dev": "nodemon --exec node_modules/@babel/node/bin/babel-node.js src/index.js",
@@ -48,6 +48,8 @@
     "morgan": "^1.7.0",
     "pg-promise": "^8.5.1",
     "q": "^1.5.1",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8",
     "twilio": "^3.32.0",
     "uuid": "^3.3.2",
     "winston": "^2.3.0"
@@ -68,7 +70,8 @@
     "nodemon": "^2.0.3",
     "nyc": "^15.0.1",
     "parcel-bundler": "^1.12.4",
-    "sinon": "^5.0.7"
+    "sinon": "^5.0.7",
+    "rewire": "^4.0.1"
   },
   "browserslist": [
     "last 1 Chrome versions"

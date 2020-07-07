@@ -8,8 +8,8 @@ const app = express();
 
 expressConfig(app);
 
-app.listen(port);
+const server = app.listen(port);
 
-logger.info(`Roadry API started on port ${port}`);
+logger.info(`Applicaion API started on port ${port}`);
 
-export default app;
+export { app, server };
